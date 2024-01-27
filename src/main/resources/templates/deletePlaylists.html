@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Delete PlayList</title>
+</head>
+<body>
+	<h1>Delete PlayList!</h1>
+	<form action="removePlaylists" method="get">
+		<table border="1">
+			<thead>
+				<tr>
+					<th>Playlists</th>
+					<th> </th>
+				</tr>
+			</thead>
+			<tr>
+				<td>
+					<div th:each="allPlaylist:${allPlaylists}">
+						<label th:text="${allPlaylist.name}"></label>
+					</div>
+				</td>
+				<td>
+					<div th:each="allPlaylist:${allPlaylists}">
+						<input type="checkbox" th:name="allPlaylists" th:value="${allPlaylist.id}"/>
+					</div>
+				</td>
+			</tr>
+
+		</table><br />
+		<input type="submit" value="removePlaylists" />
+	</form>
+
+</body>
+</html>

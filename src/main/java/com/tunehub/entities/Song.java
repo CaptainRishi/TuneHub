@@ -2,7 +2,7 @@ package com.tunehub.entities;
 
 import java.util.List;
 
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,7 +18,7 @@ public class Song {
 	String artist;
 	String genre;
 	String link;
-	@ManyToMany
+	@ManyToMany(mappedBy = "songs", cascade = CascadeType.ALL)
 	List<Playlist> playLists;
 	public Song() {
 		super();

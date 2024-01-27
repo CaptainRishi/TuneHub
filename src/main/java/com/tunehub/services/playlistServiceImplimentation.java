@@ -15,11 +15,23 @@ public class playlistServiceImplimentation implements playlistService{
 	playlistRepository repo;
 	@Override
 	public void addPlaylist(Playlist playlist) {
+		System.out.println(playlist);
 		repo.save(playlist);		
 	}
+	
 	@Override
 	public List<Playlist> fetchAllPlaylists() {
 		return repo.findAll();
 	}
+
+//	@Override
+//	public void removePlaylists(List<Long> playlistIds) {
+//        for (Long playlistId : playlistIds) {
+//        	int id = playlistId.intValue();
+//            repo.deleteById(id);
+//        }
+//    }
+	
+	
 
 }

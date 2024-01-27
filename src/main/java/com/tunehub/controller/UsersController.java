@@ -3,21 +3,24 @@ package com.tunehub.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.tunehub.entities.LoginData;
 import com.tunehub.entities.Song;
 import com.tunehub.entities.users;
 import com.tunehub.services.SongService;
 import com.tunehub.services.UsersService;
 import jakarta.servlet.http.HttpSession;
 
-
-@Controller
+@CrossOrigin
+@RestController
 public class UsersController 
 {
 	@Autowired
@@ -27,9 +30,12 @@ public class UsersController
 	
 	//Registration Controller
 	@PostMapping("/registration")
-	public String adduser(@ModelAttribute users user)
+	public String adduser(@RequestBody users user)
 	{	
 		boolean userStatus = service.emailExits(user.getEmail());
+		System.out.println(user.getEmail());
+		System.out.println(user.getUsername());
+		System.out.println(user.getUsername());
 		if (userStatus == false) 
 		{
 		service.addUser(user);
@@ -44,10 +50,12 @@ public class UsersController
 	
 	//login validation controller
 	@PostMapping ("/validate")
-	public String validate(@RequestParam ("email") String email,
-			@RequestParam ("password") String password,
+	public String validate(@RequestBody LoginData data,
 			HttpSession session, Model model)
 	{	
+		String email = data.getEmail();
+		String password = data.getPassword();
+		
 		if (service.validateUser(email, password) == true)
 		{
 			String role = service.getRole(email);
@@ -56,7 +64,7 @@ public class UsersController
 			
 			if(role.equals("admin"))
 			{
-				return "adminHome";
+				return "AdminHome";
 			}
 			else {
 				users user = service.getUser(email);

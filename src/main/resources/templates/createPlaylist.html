@@ -6,17 +6,27 @@
 </head>
 <body>
 	<h1>CreatePlayList!</h1>
-	<form action="addPlaylist" method ="post">
-		<label>PlayList name : </label>
-		<input type="text" name="name" /> 
-		<br>
-		<!-- incomplete  -->
-		<div th:each="song:${songs}">
-			<input type="checkbox" th:name="songs"th:value="${song.id}" />
-			<label th:text="${song.name}"></label>
-		</div>
-		<input type="submit" value="ADD PLAYLIST" />		
+	<form action="addPlaylist" method="post">
+		<table border="1">
+			<thead>
+				<tr>
+					<th><label>PlayList name : </label> <input type="text"
+						name="name" /></th>
+				</tr>
+			</thead>
+			<tr>
+				<td>
+					<div th:each="song:${songs}">
+						<input type="checkbox" th:name="songs" th:value="${song.id}" /> <label
+							th:text="${song.name}"></label>
+					</div> 
+					
+				</td>
+			</tr>
+
+		</table>
+		<input type="submit" value="ADD PLAYLIST" />
 	</form>
 
-</body> 
+</body>
 </html>
